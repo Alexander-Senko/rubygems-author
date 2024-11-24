@@ -1,7 +1,15 @@
 module Gem
-	class Author
+	class Author < Struct[untyped]
 		VERSION: String
 
-		# See the writing guide of rbs: https://github.com/ruby/rbs#guides
+		module ClassMethods : Class
+			@all: Array[self]
+
+			def names:      () -> Array[String]
+			def emails:     () -> Array[String]
+			def github_url: () -> String?
+		end
+
+		def github_url: () -> String?
 	end
 end

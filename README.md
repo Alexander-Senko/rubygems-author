@@ -16,21 +16,44 @@ It holds authors info to be used primarily in gem specs.
 
 TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
-
-If bundler is not being used to manage dependencies, install the gem by executing:
+Install the gem by executing:
 
 ```bash
 gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 ```
 
+> [!IMPORTANT]
+> No way to install `Gem::Author` with Bundler is yet found when it’s used in a gemspec.
+
 ## Usage
 
-TODO: Write usage instructions here
+1. Inherit `Gem::Author` inside your gem and add the authors’ info.
+
+	```ruby
+	require 'rubygems/author'
+	
+	module MyLib
+	  class Author < Gem::Author
+	    new(
+	      name:   'Your Name',
+	      email:  'Your.Name@email.service',
+	      github: 'Your-GitHub-Username',
+	    )
+	  end
+	end
+	```
+
+2. You can call some helper methods now.
+
+	```ruby
+	Gem::Specification.new do |spec|
+	  spec.name     = 'my_lib'
+	  spec.version  = MyLib::VERSION
+	  spec.authors  = MyLib::Author.names
+	  spec.email    = MyLib::Author.emails
+	  spec.homepage = "#{MyLib::Author.github_url}/#{spec.name}"
+	end
+	```
 
 ## Development
 

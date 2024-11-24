@@ -1,3 +1,5 @@
 ## [0.1.0] — UNRELEASED
 
-- Initial release
+### Added
+
+- `Gem::Author` for authors info to be used primarily in gem specs.
