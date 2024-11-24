@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require_relative 'lib/rubygems/author/version'
+require_relative 'lib/rubygems/author/authors'
 
 Gem::Specification.new do |spec|
 	spec.name        = 'rubygems-author'
 	spec.version     = Gem::Author::VERSION
-	spec.authors     = [ 'Alexander Senko' ]
-	spec.email       = %w[ Alexander.Senko@gmail.com ]
-	spec.homepage    = "https://github.com/Alexander-Senko/#{spec.name}"
+	spec.authors     = Gem::Author::Author.names
+	spec.email       = Gem::Author::Author.emails
+	spec.homepage    = "#{Gem::Author::Author.github_url}/#{spec.name}"
 	spec.summary     = 'Your gem’s authors abstraction'
 	spec.description = 'Gem::Author holds authors info to be used primarily in gem specs.'
 	spec.license     = 'MIT'

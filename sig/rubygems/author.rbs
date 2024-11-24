@@ -2,6 +2,10 @@ module Gem
 	class Author < Struct[untyped]
 		VERSION: String
 
+		class Author < Gem::Author
+			extend ClassMethods
+		end
+
 		module ClassMethods : Class
 			@all: Array[self]
 
