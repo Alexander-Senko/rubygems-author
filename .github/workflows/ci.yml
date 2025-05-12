@@ -45,11 +45,15 @@ jobs:
       matrix:
         ruby:
           - head
+          - 3.4
           - 3.3
           - 3.2
 
           - truffleruby
           - truffleruby-head
+
+          - jruby
+          - jruby-head
 
     steps:
       - name: Checkout code
