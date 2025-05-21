@@ -34,6 +34,8 @@ jobs:
         with:
           ruby-version: head
           bundler-cache: true
+        env:
+          BUNDLE_WITH: development
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
@@ -64,17 +66,8 @@ jobs:
         with:
           ruby-version:  ${{ matrix.ruby }}
           bundler-cache: true
-
-      - name: Run specs with code coverage
-        uses: paambaati/codeclimate-action@v9
         env:
-          CC_TEST_REPORTER_ID:
-        with:
-          coverageCommand: bundle exec rake
-        continue-on-error: ${{ matrix.allow-fail || false }}
-        id: test
+          BUNDLE_WITH: test
 
-      - name: >-
-          Test ${{ steps.test.outcome }}
-        run: |
-          ruby -v
+      - name: Run specs
+        run:  bundle exec rake
